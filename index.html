@@ -10,20 +10,6 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
-<script>
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCNrhC9tfS-qzEnj22mAA0VMULeP3abk70",
-  authDomain: "passagemserv3bprv.firebaseapp.com",
-  databaseURL: "https://passagemserv3bprv-default-rtdb.firebaseio.com",
-  projectId: "passagemserv3bprv",
-  storageBucket: "passagemserv3bprv.firebasestorage.app",
-  messagingSenderId: "6420472559",
-  appId: "1:6420472559:web:132cf3fc9a0bbbcdf2711a"
-};
-firebase.initializeApp(firebaseConfig);
-</script>
-
 <style>
 
 
@@ -404,6 +390,18 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
 <footer>3º BPRv · Escritório da Qualidade · NI Nº CPRv-004/300/23 — OS Nº 3BPRv-039/03/2023</footer>
 <div id="notif"></div>
 <script>
+// ── Firebase init (garantido após SDK carregar)
+var firebaseConfig = {
+  apiKey: "AIzaSyCNrhC9tfS-qzEnj22mAA0VMULeP3abk70",
+  authDomain: "passagemserv3bprv.firebaseapp.com",
+  databaseURL: "https://passagemserv3bprv-default-rtdb.firebaseio.com",
+  projectId: "passagemserv3bprv",
+  storageBucket: "passagemserv3bprv.firebasestorage.app",
+  messagingSenderId: "6420472559",
+  appId: "1:6420472559:web:132cf3fc9a0bbbcdf2711a"
+};
+if(!firebase.apps.length){ firebase.initializeApp(firebaseConfig); }
+
 // ── Firebase helpers
 var _db=null;
 function fbDB(){
