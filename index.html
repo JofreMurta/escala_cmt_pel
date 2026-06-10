@@ -81,7 +81,7 @@ main{padding:18px 28px 48px;}
 .cia-info p{font-size:10px;opacity:.75;letter-spacing:1px;text-transform:uppercase;}
 .cia-body{background:var(--card);}
 .cia-1 .cia-header{background:var(--cia1);} .cia-2 .cia-header{background:var(--cia2);} .cia-3 .cia-header{background:var(--cia3);} .cia-4 .cia-header{background:var(--cia4);}
-.pel-row{display:grid;grid-template-columns:230px 1fr 1fr;border-bottom:1px solid var(--border);transition:background .15s;}
+.pel-bloco{border-bottom:1px solid var(--border);}.pel-row{display:grid;grid-template-columns:230px 1fr 1fr;transition:background .15s;}
 .pel-row:last-child{border-bottom:none;}
 .pel-row:hover{background:#fafbfc;}
 .pel-id{padding:13px 16px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:6px;}
@@ -114,6 +114,13 @@ main{padding:18px 28px 48px;}
 .resp-sel-wrap select:focus{border-bottom-color:var(--pm-gold);}
 .info-col{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center;}
 .print-val{display:none;font-size:13px;font-weight:600;color:#1a1a2e;padding:2px 0;}
+.pel-bloco{border-bottom:1px solid var(--border);}
+.perm-row{display:block;width:100%;padding:6px 12px 8px;border-top:1px dashed #e2e8f0;background:#f8fafc;box-sizing:border-box;}
+.perm-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:5px;display:block;}
+.perm-days{display:flex;flex-wrap:wrap;gap:3px;min-height:30px;}
+.perm-day{width:26px;height:26px;border-radius:4px;border:1px solid #cbd5e1;background:#fff;font-size:10px;font-weight:600;color:#475569;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;-webkit-user-select:none;flex-shrink:0;}
+.perm-day:hover{background:#e0f2fe;border-color:#38bdf8;color:#0369a1;}
+.perm-day.marcado{background:#0a1628;border-color:#0a1628;color:#e8b84b;font-weight:700;}
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
   body{background:#fff!important;margin:0;padding:0;}
@@ -169,6 +176,10 @@ main{padding:18px 28px 48px;}
 
   .assinatura-box{box-shadow:none!important;border:1px solid #ccc!important;margin-top:10px!important;}
   footer{display:block!important;}
+  .perm-day{width:18px!important;height:18px!important;font-size:8px!important;border:1px solid #ccc!important;}
+  .perm-day.marcado{background:#0a1628!important;color:#e8b84b!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  .perm-label{font-size:8px!important;}
+  .perm-row{padding:4px 8px!important;background:#fff!important;}
 }
 footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;font-size:11px;padding:12px;letter-spacing:.5px;}
 #notif{position:fixed;bottom:20px;right:20px;background:var(--pm-navy);color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;border-left:4px solid var(--pm-gold);opacity:0;pointer-events:none;transition:opacity .3s;z-index:9999;max-width:360px;}
@@ -297,9 +308,15 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="cia-block cia-1">
     <div class="cia-header"><div class="cia-badge">1ª</div><div class="cia-info"><h2>1ª COMPANHIA RODOVIÁRIA</h2><p>Araraquara · 3 Pelotões</p></div></div>
     <div class="cia-body">
-      <div class="pel-row" data-pel="1ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
-      <div class="pel-row" data-pel="1ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
-      <div class="pel-row" data-pel="1ª Cia - 3º Pel"><div class="pel-id"><span class="pel-num">3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="1ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="1ª Cia - 1º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-1__Cia___1__Pel"></div></div>
+</div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="1ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="1ª Cia - 2º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-1__Cia___2__Pel"></div></div>
+</div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="1ª Cia - 3º Pel"><div class="pel-id"><span class="pel-num">3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="1ª Cia - 3º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-1__Cia___3__Pel"></div></div>
+</div>
     </div>
   </div>
 
@@ -307,8 +324,12 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="cia-block cia-2">
     <div class="cia-header"><div class="cia-badge">2ª</div><div class="cia-info"><h2>2ª COMPANHIA RODOVIÁRIA</h2><p>Rio Claro · 2 Pelotões</p></div></div>
     <div class="cia-body">
-      <div class="pel-row" data-pel="2ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
-      <div class="pel-row" data-pel="2ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="2ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="2ª Cia - 1º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-2__Cia___1__Pel"></div></div>
+</div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="2ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="2ª Cia - 2º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-2__Cia___2__Pel"></div></div>
+</div>
     </div>
   </div>
 
@@ -316,9 +337,15 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="cia-block cia-3">
     <div class="cia-header"><div class="cia-badge">3ª</div><div class="cia-info"><h2>3ª COMPANHIA RODOVIÁRIA</h2><p>São José do Rio Preto · 3 Pelotões + TOR</p></div></div>
     <div class="cia-body">
-      <div class="pel-row" data-pel="3ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
-      <div class="pel-row" data-pel="3ª Cia - 2º e 3º Pel"><div class="pel-id"><span class="pel-num">2º e 3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
-      <div class="pel-row" data-pel="3ª Cia - TOR"><div class="pel-id"><span class="pel-num">TOR</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="3ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="3ª Cia - 1º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-3__Cia___1__Pel"></div></div>
+</div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="3ª Cia - 2º e 3º Pel"><div class="pel-id"><span class="pel-num">2º e 3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="3ª Cia - 2º e 3º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-3__Cia___2__e_3__Pel"></div></div>
+</div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="3ª Cia - TOR"><div class="pel-id"><span class="pel-num">TOR</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="3ª Cia - TOR"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-3__Cia___TOR"></div></div>
+</div>
     </div>
   </div>
 
@@ -326,9 +353,15 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="cia-block cia-4">
     <div class="cia-header"><div class="cia-badge">4ª</div><div class="cia-info"><h2>4ª COMPANHIA RODOVIÁRIA</h2><p>Ribeirão Preto · 3 Pelotões</p></div></div>
     <div class="cia-body">
-      <div class="pel-row" data-pel="4ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
-      <div class="pel-row" data-pel="4ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
-      <div class="pel-row" data-pel="4ª Cia - 3º Pel"><div class="pel-id"><span class="pel-num">3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="4ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="4ª Cia - 1º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-4__Cia___1__Pel"></div></div>
+</div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="4ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="4ª Cia - 2º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-4__Cia___2__Pel"></div></div>
+</div>
+      <div class="pel-bloco"><div class="pel-row" data-pel="4ª Cia - 3º Pel"><div class="pel-id"><span class="pel-num">3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
+<div class="perm-row" data-perm="4ª Cia - 3º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-4__Cia___3__Pel"></div></div>
+</div>
     </div>
   </div>
 
@@ -390,6 +423,62 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
 <footer>3º BPRv · Escritório da Qualidade · NI Nº CPRv-004/300/23 — OS Nº 3BPRv-039/03/2023</footer>
 <div id="notif"></div>
 <script>
+
+// ── PERMANÊNCIA: gera os dias do mês e vincula eventos
+function gerarDiasPermanencia(){
+  var ym = mesSel.value;
+  if(!ym){
+    var hoje = new Date();
+    ym = hoje.getFullYear()+'-'+String(hoje.getMonth()+1).padStart(2,'0');
+  }
+  var partes = ym.split('-');
+  var ano  = parseInt(partes[0]);
+  var mes  = parseInt(partes[1]);
+  var totalDias = new Date(ano, mes, 0).getDate();
+
+  document.querySelectorAll('.perm-days').forEach(function(container){
+    var pelId = container.closest('.perm-row').dataset.perm;
+    var permData = _permAtual[pelId] || [];
+    container.innerHTML = '';
+    for(var d = 1; d <= totalDias; d++){
+      var btn = document.createElement('div');
+      btn.className = 'perm-day' + (permData.indexOf(d) >= 0 ? ' marcado' : '');
+      btn.textContent = d;
+      btn.dataset.dia = d;
+      btn.dataset.pel = pelId;
+      btn.addEventListener('click', function(){
+        togglePermDia(this.dataset.pel, parseInt(this.dataset.dia));
+        this.classList.toggle('marcado');
+      });
+      container.appendChild(btn);
+    }
+  });
+}
+
+function togglePermDia(pelId, dia){
+  if(!_permAtual[pelId]) _permAtual[pelId] = [];
+  var idx = _permAtual[pelId].indexOf(dia);
+  if(idx >= 0){
+    _permAtual[pelId].splice(idx, 1);
+  } else {
+    _permAtual[pelId].push(dia);
+    _permAtual[pelId].sort(function(a,b){return a-b;});
+  }
+  salvarDados();
+  agendarSalvarNuvem();
+}
+
+function aplicarPermanencia(permData){
+  if(!permData) return;
+  _permAtual = permData;
+  document.querySelectorAll('.perm-day').forEach(function(btn){
+    var pelId = btn.dataset.pel;
+    var dia   = parseInt(btn.dataset.dia);
+    var marcado = _permAtual[pelId] && _permAtual[pelId].indexOf(dia) >= 0;
+    btn.classList.toggle('marcado', marcado);
+  });
+}
+
 // ── Firebase init (garantido após SDK carregar)
 var firebaseConfig = {
   apiKey: "AIzaSyCNrhC9tfS-qzEnj22mAA0VMULeP3abk70",
@@ -491,6 +580,7 @@ function _salvarNuvemAgora(){
   var snap=capturarEscala();
   var payload={
     pelotoes:    snap,
+    permanencia: capturarPermAtual(),
     responsavel: document.getElementById('resp-sel').value||'',
     mes:         ym,
     tenentes:    JSON.parse(JSON.stringify(tenentes)),
@@ -504,6 +594,7 @@ function _salvarNuvemAgora(){
 }
 
 var _logAtual=[];
+var _permAtual={};
 
 // ── Helpers
 function grupoDaCell(c){return c.querySelector('.scale-label').textContent.includes('Seg')?'segqui':'fds';}
@@ -524,6 +615,7 @@ mesSel.value=hoje.getFullYear()+'-'+String(hoje.getMonth()+1).padStart(2,'0');
 atualizarMesRef();
 mesSel.addEventListener('change',function(){
   atualizarMesRef();
+  _permAtual={};
   carregarMes();
   // Re-attach Firebase listener for new month
   try {
@@ -595,6 +687,7 @@ function _aplicarDadosCarregados(r){
 
 function _aplicarEscalaCompleta(escala){
   aplicarEscala(escala.pelotoes||{});
+  if(escala.permanencia){ _permAtual=escala.permanencia; }
   if(escala.responsavel){
     var rSel=document.getElementById('resp-sel');
     var rVal=escala.responsavel;
@@ -626,6 +719,7 @@ function _carregarLocal(ym){
   }
   atualizarSummary();
   sincronizarPrint();
+  setTimeout(function(){ gerarDiasPermanencia(); }, 100);
 }
 
 // ── Captura e aplica escala
@@ -649,6 +743,10 @@ function capturarEscala(){
     };
   });
   return snap;
+}
+
+function capturarPermAtual(){
+  return JSON.parse(JSON.stringify(_permAtual));
 }
 
 function aplicarEscala(snap){
@@ -1117,6 +1215,7 @@ function salvarFicheiro(){
   var snap=capturarEscala();
   var dados={
     pelotoes:    snap,
+    permanencia: capturarPermAtual(),
     responsavel: document.getElementById('resp-sel').value||'',
     mes:         ym,
     tenentes:    JSON.parse(JSON.stringify(tenentes)),
@@ -1271,6 +1370,11 @@ function vincularEventos(){
   });
 }
 
+// ── Garantia final: gera dias quando página está 100% carregada
+window.addEventListener('load', function(){
+  setTimeout(function(){ gerarDiasPermanencia(); }, 300);
+});
+
 // ── Init
 (function init(){
   // Carrega imagens via JS após o DOM estar pronto (não bloqueia impressão)
@@ -1293,6 +1397,8 @@ function vincularEventos(){
   renderSelects();
   vincularEventos();
   atualizarSummary();
+  // Gera dias após DOM e Firebase estarem prontos
+  setTimeout(function(){ gerarDiasPermanencia(); }, 200);
   // Carrega listas globais primeiro
   fbGet('listas', function(listas){
     if(listas){
@@ -1308,6 +1414,7 @@ function vincularEventos(){
         _logAtual=[];renderLog([]);
       }
       atualizarSummary();sincronizarPrint();
+      gerarDiasPermanencia();
       // Activa listener em tempo real
       iniciarListener();
     });
