@@ -60,7 +60,7 @@ header::before{content:'';position:absolute;inset:0;background:repeating-linear-
 .log-dt{color:var(--muted);white-space:nowrap;flex-shrink:0;}
 .log-what{flex:1;}
 .log-empty{color:var(--muted);font-style:italic;font-size:12px;padding:4px 0;}
-main{padding:18px 28px 48px;}
+main{padding:18px 28px 48px;max-width:1400px;margin:0 auto;}
 .summary-bar{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
 .sum-card{background:var(--card);border-radius:8px;padding:10px 15px;display:flex;flex-direction:column;gap:2px;box-shadow:0 1px 6px rgba(0,0,0,.07);min-width:115px;}
 .sum-val{font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;line-height:1;}
