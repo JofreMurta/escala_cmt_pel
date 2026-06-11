@@ -5,11 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Escala de Ronda – Cmt de Pel | 3º BPRv</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
-
-<!-- Firebase SDK (compat version - works without bundler) -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
 <style>
 
 
@@ -81,7 +78,7 @@ main{padding:18px 28px 48px;}
 .cia-info p{font-size:10px;opacity:.75;letter-spacing:1px;text-transform:uppercase;}
 .cia-body{background:var(--card);}
 .cia-1 .cia-header{background:var(--cia1);} .cia-2 .cia-header{background:var(--cia2);} .cia-3 .cia-header{background:var(--cia3);} .cia-4 .cia-header{background:var(--cia4);}
-.pel-bloco{border-bottom:1px solid var(--border);}.pel-row{display:grid;grid-template-columns:230px 1fr 1fr;transition:background .15s;}
+.pel-row{display:grid;grid-template-columns:230px 1fr 1fr;border-bottom:1px solid var(--border);transition:background .15s;}
 .pel-row:last-child{border-bottom:none;}
 .pel-row:hover{background:#fafbfc;}
 .pel-id{padding:13px 16px;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:6px;}
@@ -114,13 +111,6 @@ main{padding:18px 28px 48px;}
 .resp-sel-wrap select:focus{border-bottom-color:var(--pm-gold);}
 .info-col{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center;}
 .print-val{display:none;font-size:13px;font-weight:600;color:#1a1a2e;padding:2px 0;}
-.pel-bloco{border-bottom:1px solid var(--border);}
-.perm-row{display:block;width:100%;padding:6px 12px 8px;border-top:1px dashed #e2e8f0;background:#f8fafc;box-sizing:border-box;}
-.perm-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:5px;display:block;}
-.perm-days{display:flex;flex-wrap:wrap;gap:3px;min-height:30px;}
-.perm-day{width:26px;height:26px;border-radius:4px;border:1px solid #cbd5e1;background:#fff;font-size:10px;font-weight:600;color:#475569;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;-webkit-user-select:none;flex-shrink:0;}
-.perm-day:hover{background:#e0f2fe;border-color:#38bdf8;color:#0369a1;}
-.perm-day.marcado{background:#0a1628;border-color:#0a1628;color:#e8b84b;font-weight:700;}
 @media print{
   *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
   body{background:#fff!important;margin:0;padding:0;}
@@ -176,10 +166,6 @@ main{padding:18px 28px 48px;}
 
   .assinatura-box{box-shadow:none!important;border:1px solid #ccc!important;margin-top:10px!important;}
   footer{display:block!important;}
-  .perm-day{width:18px!important;height:18px!important;font-size:8px!important;border:1px solid #ccc!important;}
-  .perm-day.marcado{background:#0a1628!important;color:#e8b84b!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
-  .perm-label{font-size:8px!important;}
-  .perm-row{padding:4px 8px!important;background:#fff!important;}
 }
 footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;font-size:11px;padding:12px;letter-spacing:.5px;}
 #notif{position:fixed;bottom:20px;right:20px;background:var(--pm-navy);color:#fff;padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;border-left:4px solid var(--pm-gold);opacity:0;pointer-events:none;transition:opacity .3s;z-index:9999;max-width:360px;}
@@ -191,20 +177,53 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
 
 
 
-
+.cmt-cia-bloco{border-bottom:2px solid var(--gold);background:linear-gradient(90deg,rgba(200,153,42,.07) 0%,transparent 60%);}
+.cmt-cia-row{display:block;transition:background .15s;}
+.cmt-cia-id{padding:12px 14px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--border);}
+.cmt-cia-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);}
+.pel-bloco{border-bottom:1px solid var(--border);}
+.perm-row{display:block;width:100%;padding:6px 12px 8px;border-top:1px dashed #e2e8f0;background:#f8fafc;box-sizing:border-box;}
+.sup-reg-row{display:block;width:100%;padding:6px 12px 8px;border-top:1px dashed rgba(200,153,42,.3);background:#fffbf0;box-sizing:border-box;}
+.perm-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:5px;display:block;}
+.sup-reg-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#92620a;margin-bottom:5px;display:block;}
+.perm-days{display:flex;flex-wrap:wrap;gap:3px;min-height:30px;}
+.perm-day{width:26px;height:26px;border-radius:4px;border:1px solid #cbd5e1;background:#fff;font-size:10px;font-weight:600;color:#475569;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;-webkit-user-select:none;flex-shrink:0;}
+.perm-day:hover{background:#e0f2fe;border-color:#38bdf8;color:#0369a1;}
+.perm-day.marcado{background:#0a1628;border-color:#0a1628;color:#e8b84b;font-weight:700;}
+.cmt-cia-bloco{border-bottom:2px solid var(--gold);background:linear-gradient(90deg,rgba(200,153,42,.07) 0%,transparent 60%);}
+.cmt-cia-row{display:block;transition:background .15s;}
+.cmt-cia-id{padding:12px 14px;display:flex;flex-direction:column;gap:4px;border-right:1px solid var(--border);}
+.cmt-cia-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);}
+.pel-bloco{border-bottom:1px solid var(--border);}
+.perm-row{display:block;width:100%;padding:6px 12px 8px;border-top:1px dashed #e2e8f0;background:#f8fafc;box-sizing:border-box;}
+.sup-reg-row{display:block;width:100%;padding:6px 12px 8px;border-top:1px dashed rgba(200,153,42,.3);background:#fffbf0;box-sizing:border-box;}
+.perm-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:5px;display:block;}
+.sup-reg-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#92620a;margin-bottom:5px;display:block;}
+.perm-days{display:flex;flex-wrap:wrap;gap:3px;min-height:30px;}
+.perm-day{width:26px;height:26px;border-radius:4px;border:1px solid #cbd5e1;background:#fff;font-size:10px;font-weight:600;color:#475569;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;user-select:none;-webkit-user-select:none;flex-shrink:0;}
+.perm-day:hover{background:#e0f2fe;border-color:#38bdf8;color:#0369a1;}
+.perm-day.marcado{background:#0a1628;border-color:#0a1628;color:#e8b84b;font-weight:700;}
+.op-row{display:block;width:100%;padding:6px 12px 8px;border-top:1px dashed #bfdbfe;background:#eff6ff;box-sizing:border-box;}
+.op-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#1d4ed8;margin-bottom:5px;display:block;}
+@media print{
+  .perm-day{width:18px!important;height:18px!important;font-size:8px!important;}
+  .perm-day.marcado{background:#0a1628!important;color:#e8b84b!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  .perm-row,.sup-reg-row,.op-row{padding:3px 8px!important;}
+  .op-row{background:#eff6ff!important;}
+}
 </style>
 </head>
 <body>
 <!-- MODAL TENENTES -->
 <div class="modal-overlay" id="modal-ten">
   <div class="modal">
-    <div class="modal-head"><h3>⚙ Gerenciar Lista de Tenentes</h3><button class="modal-close" onclick="fecharModal('modal-ten')">✕</button></div>
+    <div class="modal-head"><h3>⚙ Gerenciar Lista de Oficiais</h3><button class="modal-close" onclick="fecharModal('modal-ten')">✕</button></div>
     <div class="modal-body">
       <ul class="ten-list" id="ten-list"></ul>
       <hr style="margin-bottom:12px;border-color:var(--border)">
       <div class="modal-section-title">Adicionar Tenente</div>
       <div class="add-row">
-        <input type="text" id="add-nome" placeholder="Nome (ex: 1º Ten PM Silva)" style="flex:2">
+        <input type="text" id="add-nome" placeholder="Nome completo" style="flex:2"><select id="add-posto" style="padding:6px 8px;border:1px solid var(--border);border-radius:6px;font-size:12px;background:var(--card);color:var(--text);"><option value="cap">Cap PM</option><option value="1ten" selected>1º Ten PM</option><option value="2ten">2º Ten PM</option></select>
         <input type="text" id="add-fone" placeholder="Telefone">
         <button class="btn btn-teal" onclick="adicionarTenente()">+ Adicionar</button>
       </div>
@@ -250,7 +269,7 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="header-inner">
     <div class="header-logo" id="logo-img" role="img" aria-label="3º BPRv"></div>
     <div class="header-text">
-      <h1>ESCALA DE RONDA — COMANDANTES DE PELOTÃO</h1>
+      <h1>ESCALA DE OFICIAIS</h1>
       <div class="header-org">
         Polícia Militar do Estado de São Paulo<br>
         Comando de Policiamento Rodoviário<br>
@@ -267,7 +286,7 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
 <!-- Cabeçalho para impressão (texto puro, sem imagens) -->
 <div id="print-header" style="display:none;">
   <div style="border-bottom:3px solid #c8992a;padding:10px 0 8px;margin-bottom:6px;text-align:center;">
-    <div style="font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:800;letter-spacing:1px;color:#0a1628;">ESCALA DE RONDA — COMANDANTES DE PELOTÃO</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:800;letter-spacing:1px;color:#0a1628;">ESCALA DE OFICIAIS</div>
     <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#555;margin-top:3px;line-height:1.8;">Polícia Militar do Estado de São Paulo &nbsp;·&nbsp; Comando de Policiamento Rodoviário &nbsp;·&nbsp; 3º Batalhão de Polícia Rodoviária</div>
     <div style="font-size:11px;color:#333;margin-top:3px;"><strong id="print-ref-mes" style="font-size:13px;display:block;margin-bottom:2px;"></strong>(NI Nº CPRv-004/300/23 — OS Nº 3BPRv-039/03/2023)</div>
   </div>
@@ -278,7 +297,7 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <input type="month" id="mes-sel">
   <div class="toolbar-right">
     <button class="btn btn-navy" onclick="abrirModal('modal-hist')">📅 Histórico</button>
-    <button class="btn btn-teal" onclick="abrirModal('modal-ten')">⚙ Tenentes</button>
+    <button class="btn btn-teal" onclick="abrirModal('modal-ten')">⚙ Oficiais</button>
     <button class="btn btn-teal" onclick="abrirModal('modal-resp')">👤 Responsáveis</button>
     <button class="btn btn-gold" onclick="mostrarInstrucaoImpressao()">⎙ Imprimir / PDF</button>
     <button class="btn btn-gold" style="background:#16a34a;" onclick="salvarFicheiro()">💾 Salvar</button>
@@ -308,14 +327,23 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="cia-block cia-1">
     <div class="cia-header"><div class="cia-badge">1ª</div><div class="cia-info"><h2>1ª COMPANHIA RODOVIÁRIA</h2><p>Araraquara · 3 Pelotões</p></div></div>
     <div class="cia-body">
+<div class="cmt-cia-bloco">
+<div class="cmt-cia-row" data-pel="1ª Cia - Cmt"><div class="cmt-cia-id"><span class="cmt-cia-label">Cmt de Cia</span><div class="ten-select-wrap"><select class="cmt-sel cap-sel"><option value="">— Selecione o Capitão —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div></div>
+<div class="sup-reg-row" data-perm="1ª Cia - Cmt"><div class="sup-reg-label">Of. Sup. Regional</div><div class="perm-days" id="perm-1__Cia___Cmt"></div></div>
+<div class="op-row" data-perm="op-1ª Cia - Cmt"><div class="op-label">Operações</div><div class="perm-days" id="op-1__Cia___Cmt"></div></div>
+</div>
+
       <div class="pel-bloco"><div class="pel-row" data-pel="1ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="1ª Cia - 1º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-1__Cia___1__Pel"></div></div>
+<div class="op-row" data-perm="op-1ª Cia - 1º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-1__Cia___1__Pel"></div></div>
 </div>
       <div class="pel-bloco"><div class="pel-row" data-pel="1ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="1ª Cia - 2º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-1__Cia___2__Pel"></div></div>
+<div class="op-row" data-perm="op-1ª Cia - 2º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-1__Cia___2__Pel"></div></div>
 </div>
       <div class="pel-bloco"><div class="pel-row" data-pel="1ª Cia - 3º Pel"><div class="pel-id"><span class="pel-num">3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="1ª Cia - 3º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-1__Cia___3__Pel"></div></div>
+<div class="op-row" data-perm="op-1ª Cia - 3º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-1__Cia___3__Pel"></div></div>
 </div>
     </div>
   </div>
@@ -324,11 +352,19 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="cia-block cia-2">
     <div class="cia-header"><div class="cia-badge">2ª</div><div class="cia-info"><h2>2ª COMPANHIA RODOVIÁRIA</h2><p>Rio Claro · 2 Pelotões</p></div></div>
     <div class="cia-body">
+<div class="cmt-cia-bloco">
+<div class="cmt-cia-row" data-pel="2ª Cia - Cmt"><div class="cmt-cia-id"><span class="cmt-cia-label">Cmt de Cia</span><div class="ten-select-wrap"><select class="cmt-sel cap-sel"><option value="">— Selecione o Capitão —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div></div>
+<div class="sup-reg-row" data-perm="2ª Cia - Cmt"><div class="sup-reg-label">Of. Sup. Regional</div><div class="perm-days" id="perm-2__Cia___Cmt"></div></div>
+<div class="op-row" data-perm="op-2ª Cia - Cmt"><div class="op-label">Operações</div><div class="perm-days" id="op-2__Cia___Cmt"></div></div>
+</div>
+
       <div class="pel-bloco"><div class="pel-row" data-pel="2ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="2ª Cia - 1º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-2__Cia___1__Pel"></div></div>
+<div class="op-row" data-perm="op-2ª Cia - 1º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-2__Cia___1__Pel"></div></div>
 </div>
       <div class="pel-bloco"><div class="pel-row" data-pel="2ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="2ª Cia - 2º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-2__Cia___2__Pel"></div></div>
+<div class="op-row" data-perm="op-2ª Cia - 2º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-2__Cia___2__Pel"></div></div>
 </div>
     </div>
   </div>
@@ -337,14 +373,23 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="cia-block cia-3">
     <div class="cia-header"><div class="cia-badge">3ª</div><div class="cia-info"><h2>3ª COMPANHIA RODOVIÁRIA</h2><p>São José do Rio Preto · 3 Pelotões + TOR</p></div></div>
     <div class="cia-body">
+<div class="cmt-cia-bloco">
+<div class="cmt-cia-row" data-pel="3ª Cia - Cmt"><div class="cmt-cia-id"><span class="cmt-cia-label">Cmt de Cia</span><div class="ten-select-wrap"><select class="cmt-sel cap-sel"><option value="">— Selecione o Capitão —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div></div>
+<div class="sup-reg-row" data-perm="3ª Cia - Cmt"><div class="sup-reg-label">Of. Sup. Regional</div><div class="perm-days" id="perm-3__Cia___Cmt"></div></div>
+<div class="op-row" data-perm="op-3ª Cia - Cmt"><div class="op-label">Operações</div><div class="perm-days" id="op-3__Cia___Cmt"></div></div>
+</div>
+
       <div class="pel-bloco"><div class="pel-row" data-pel="3ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="3ª Cia - 1º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-3__Cia___1__Pel"></div></div>
+<div class="op-row" data-perm="op-3ª Cia - 1º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-3__Cia___1__Pel"></div></div>
 </div>
       <div class="pel-bloco"><div class="pel-row" data-pel="3ª Cia - 2º e 3º Pel"><div class="pel-id"><span class="pel-num">2º e 3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="3ª Cia - 2º e 3º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-3__Cia___2__e_3__Pel"></div></div>
+<div class="op-row" data-perm="op-3ª Cia - 2º e 3º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-3__Cia___2__e_3__Pel"></div></div>
 </div>
       <div class="pel-bloco"><div class="pel-row" data-pel="3ª Cia - TOR"><div class="pel-id"><span class="pel-num">TOR</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="3ª Cia - TOR"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-3__Cia___TOR"></div></div>
+<div class="op-row" data-perm="op-3ª Cia - TOR"><div class="op-label">Operações</div><div class="perm-days" id="op-3__Cia___TOR"></div></div>
 </div>
     </div>
   </div>
@@ -353,14 +398,23 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
   <div class="cia-block cia-4">
     <div class="cia-header"><div class="cia-badge">4ª</div><div class="cia-info"><h2>4ª COMPANHIA RODOVIÁRIA</h2><p>Ribeirão Preto · 3 Pelotões</p></div></div>
     <div class="cia-body">
+<div class="cmt-cia-bloco">
+<div class="cmt-cia-row" data-pel="4ª Cia - Cmt"><div class="cmt-cia-id"><span class="cmt-cia-label">Cmt de Cia</span><div class="ten-select-wrap"><select class="cmt-sel cap-sel"><option value="">— Selecione o Capitão —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div></div>
+<div class="sup-reg-row" data-perm="4ª Cia - Cmt"><div class="sup-reg-label">Of. Sup. Regional</div><div class="perm-days" id="perm-4__Cia___Cmt"></div></div>
+<div class="op-row" data-perm="op-4ª Cia - Cmt"><div class="op-label">Operações</div><div class="perm-days" id="op-4__Cia___Cmt"></div></div>
+</div>
+
       <div class="pel-bloco"><div class="pel-row" data-pel="4ª Cia - 1º Pel"><div class="pel-id"><span class="pel-num">1º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="4ª Cia - 1º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-4__Cia___1__Pel"></div></div>
+<div class="op-row" data-perm="op-4ª Cia - 1º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-4__Cia___1__Pel"></div></div>
 </div>
       <div class="pel-bloco"><div class="pel-row" data-pel="4ª Cia - 2º Pel"><div class="pel-id"><span class="pel-num">2º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="4ª Cia - 2º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-4__Cia___2__Pel"></div></div>
+<div class="op-row" data-perm="op-4ª Cia - 2º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-4__Cia___2__Pel"></div></div>
 </div>
       <div class="pel-bloco"><div class="pel-row" data-pel="4ª Cia - 3º Pel"><div class="pel-id"><span class="pel-num">3º Pelotão</span><div class="ten-select-wrap"><select class="cmt-sel"><option value="">— Selecione o Tenente —</option></select><span class="print-val"></span><span class="tel-display">—</span></div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-seg"></span>Seg – Qui (23h59)</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div><div class="scale-cell"><div class="scale-label"><span class="dot dot-fim"></span>Sáb / Dom</div><div class="scale-fields"><select class="dia-sel"><option value="">Dia</option><option>Segunda-feira</option><option>Terça-feira</option><option>Quarta-feira</option><option>Quinta-feira</option><option>Sexta-feira</option><option>Sábado</option><option>Domingo</option></select><span class="print-val"></span><input type="date" class="dt-field"><input type="time" class="hr-field" value="23:59"></div><div class="scale-status status-none">— Pendente</div></div></div>
 <div class="perm-row" data-perm="4ª Cia - 3º Pel"><div class="perm-label">Of. Permanência</div><div class="perm-days" id="perm-4__Cia___3__Pel"></div></div>
+<div class="op-row" data-perm="op-4ª Cia - 3º Pel"><div class="op-label">Operações</div><div class="perm-days" id="op-4__Cia___3__Pel"></div></div>
 </div>
     </div>
   </div>
@@ -423,138 +477,68 @@ footer{background:var(--pm-blue);color:rgba(255,255,255,.4);text-align:center;fo
 <footer>3º BPRv · Escritório da Qualidade · NI Nº CPRv-004/300/23 — OS Nº 3BPRv-039/03/2023</footer>
 <div id="notif"></div>
 <script>
-
-// ── PERMANÊNCIA: gera os dias do mês e vincula eventos
-function gerarDiasPermanencia(){
-  var ym = mesSel.value;
-  if(!ym){
-    var hoje = new Date();
-    ym = hoje.getFullYear()+'-'+String(hoje.getMonth()+1).padStart(2,'0');
-  }
-  var partes = ym.split('-');
-  var ano  = parseInt(partes[0]);
-  var mes  = parseInt(partes[1]);
-  var totalDias = new Date(ano, mes, 0).getDate();
-
-  document.querySelectorAll('.perm-days').forEach(function(container){
-    var pelId = container.closest('.perm-row').dataset.perm;
-    var permData = _permAtual[pelId] || [];
-    container.innerHTML = '';
-    for(var d = 1; d <= totalDias; d++){
-      var btn = document.createElement('div');
-      btn.className = 'perm-day' + (permData.indexOf(d) >= 0 ? ' marcado' : '');
-      btn.textContent = d;
-      btn.dataset.dia = d;
-      btn.dataset.pel = pelId;
-      btn.addEventListener('click', function(){
-        togglePermDia(this.dataset.pel, parseInt(this.dataset.dia));
-        this.classList.toggle('marcado');
-      });
-      container.appendChild(btn);
-    }
-  });
-}
-
-function togglePermDia(pelId, dia){
-  if(!_permAtual[pelId]) _permAtual[pelId] = [];
-  var idx = _permAtual[pelId].indexOf(dia);
-  if(idx >= 0){
-    _permAtual[pelId].splice(idx, 1);
-  } else {
-    _permAtual[pelId].push(dia);
-    _permAtual[pelId].sort(function(a,b){return a-b;});
-  }
-  salvarDados();
-  agendarSalvarNuvem();
-}
-
-function aplicarPermanencia(permData){
-  if(!permData) return;
-  _permAtual = permData;
-  document.querySelectorAll('.perm-day').forEach(function(btn){
-    var pelId = btn.dataset.pel;
-    var dia   = parseInt(btn.dataset.dia);
-    var marcado = _permAtual[pelId] && _permAtual[pelId].indexOf(dia) >= 0;
-    btn.classList.toggle('marcado', marcado);
-  });
-}
-
-// ── Firebase init (garantido após SDK carregar)
-var firebaseConfig = {
-  apiKey: "AIzaSyCNrhC9tfS-qzEnj22mAA0VMULeP3abk70",
-  authDomain: "passagemserv3bprv.firebaseapp.com",
-  databaseURL: "https://passagemserv3bprv-default-rtdb.firebaseio.com",
-  projectId: "passagemserv3bprv",
-  storageBucket: "passagemserv3bprv.firebasestorage.app",
-  messagingSenderId: "6420472559",
-  appId: "1:6420472559:web:132cf3fc9a0bbbcdf2711a"
-};
-if(!firebase.apps.length){ firebase.initializeApp(firebaseConfig); }
-
-// ── Firebase helpers
+// ── Firebase
+var firebaseConfig={apiKey:"AIzaSyCNrhC9tfS-qzEnj22mAA0VMULeP3abk70",authDomain:"passagemserv3bprv.firebaseapp.com",databaseURL:"https://passagemserv3bprv-default-rtdb.firebaseio.com",projectId:"passagemserv3bprv",storageBucket:"passagemserv3bprv.firebasestorage.app",messagingSenderId:"6420472559",appId:"1:6420472559:web:132cf3fc9a0bbbcdf2711a"};
+if(!firebase.apps.length){firebase.initializeApp(firebaseConfig);}
 var _db=null;
-function fbDB(){
-  if(!_db) _db=firebase.database();
-  return _db;
-}
-function fbSet(path, data, callback){
-  fbDB().ref(path).set(data).then(function(){
-    if(callback) callback();
-  }).catch(function(e){
-    console.error('fbSet error:',e);
-  });
-}
-function fbGet(path, callback){
-  fbDB().ref(path).once('value').then(function(snap){
-    callback(snap.val());
-  }).catch(function(e){
-    console.error('fbGet error:',e);
-    callback(null);
-  });
-}
-
-// ── Firebase live listener — actualiza automaticamente quando outros utilizadores guardam
+function fbDB(){if(!_db)_db=firebase.database();return _db;}
+function fbSet(p,d,cb){fbDB().ref(p).set(d).then(function(){if(cb)cb();}).catch(function(e){console.error(e);});}
+function fbGet(p,cb){fbDB().ref(p).once('value').then(function(s){cb(s.val());}).catch(function(e){console.error(e);cb(null);});}
 function iniciarListener(){
-  fbDB().ref('listas').on('value', function(snap){
-    var listas=snap.val();
-    if(!listas) return;
-    if(listas.tenentes&&listas.tenentes.length){
-      tenentes=listas.tenentes;
-      renderSelects();
-    }
-    if(listas.responsaveis&&listas.responsaveis.length){
-      responsaveis=listas.responsaveis;
-      renderRespSelect();
+  fbDB().ref('listas').on('value',function(s){var l=s.val();if(!l)return;if(l.tenentes&&l.tenentes.length){tenentes=l.tenentes;renderSelects();}if(l.responsaveis&&l.responsaveis.length){responsaveis=l.responsaveis;renderRespSelect();}});
+  fbDB().ref('escalas/'+mesSel.value).on('value',function(s){var d=s.val();if(!d||_saveTimer)return;_aplicarDadosCarregados({escala:d,tenentes:tenentes,responsaveis:responsaveis});});
+}
+// ── Permanencia
+function gerarDiasPermanencia(){
+  var ym=mesSel.value;
+  if(!ym){var _nn=new Date();ym=_nn.getFullYear()+'-'+String(_nn.getMonth()+1).padStart(2,'0');}
+  var _p2=ym.split('-'),_a2=parseInt(_p2[0]),_m2=parseInt(_p2[1]),_t2=new Date(_a2,_m2,0).getDate();
+  document.querySelectorAll('.perm-days').forEach(function(c){
+    var pid=c.closest('[data-perm]').dataset.perm,pd=_permAtual[pid]||[];
+    c.innerHTML='';
+    for(var d=1;d<=_t2;d++){
+      var b=document.createElement('div');
+      b.className='perm-day'+(pd.indexOf(d)>=0?' marcado':'');
+      b.textContent=d;b.dataset.dia=d;b.dataset.pel=pid;
+      b.addEventListener('click',function(){togglePermDia(this.dataset.pel,parseInt(this.dataset.dia));this.classList.toggle('marcado');});
+      c.appendChild(b);
     }
   });
-  var ym=mesSel.value;
-  if(ym){
-    fbDB().ref('escalas/'+ym).on('value', function(snap){
-      var data=snap.val();
-      if(!data) return;
-      // Só actualiza se não for o próprio utilizador a escrever
-      if(_saveTimer) return;
-      _aplicarDadosCarregados({
-        escala:data,
-        tenentes:tenentes,
-        responsaveis:responsaveis
+}
+function togglePermDia(pelId,dia){
+  if(!_permAtual[pelId])_permAtual[pelId]=[];
+  var i=_permAtual[pelId].indexOf(dia);
+  if(i>=0)_permAtual[pelId].splice(i,1);
+  else{_permAtual[pelId].push(dia);_permAtual[pelId].sort(function(a,b){return a-b;});}
+  salvarDados();agendarSalvarNuvem();
+}
+function capturarPermAtual(){return JSON.parse(JSON.stringify(_permAtual));}
+
+    fbGet('listas',function(listas){
+      if(listas){
+        if(listas.tenentes&&listas.tenentes.length){tenentes=listas.tenentes;renderSelects();}
+        if(listas.responsaveis&&listas.responsaveis.length){responsaveis=listas.responsaveis;renderRespSelect();}
+      }
+      fbGet('escalas/'+mesSel.value,function(data){
+        if(data){_aplicarEscalaCompleta(data);}else{_logAtual=[];renderLog([]);}
+        atualizarSummary();sincronizarPrint();
+        setTimeout(function(){gerarDiasPermanencia();},100);
+        iniciarListener();
       });
     });
-  }
-}
-
+    return;
 
 
 
 // ── Dados iniciais (substituídos ao carregar do servidor)
 var tenentes=[
-  {nome:'1\u00ba Ten PM Marcelo Ferraz',tel:'(11) 96842-9905',ativo:true},
-  {nome:'1\u00ba Ten PM Gabriel',tel:'(17) 99117-3480',ativo:true},
-  {nome:'1\u00ba Ten PM Cutis',tel:'(16) 99787-8497',ativo:true},
-  {nome:'1\u00ba Ten PM Severo',tel:'(17) 99727-8808',ativo:true},
-  {nome:'1\u00ba Ten PM Jean',tel:'(17) 99622-4021',ativo:true},
-  {nome:'1\u00ba Ten PM Tavella',tel:'(16) 99187-9246',ativo:true},
-  {nome:'2\u00ba Ten PM Ferraz',tel:'(16) 99755-2084',ativo:true}
+  {nome:'1\u00ba Ten PM Marcelo Ferraz',posto:'1ten',tel:'(11) 96842-9905',ativo:true},
+  {nome:'1\u00ba Ten PM Gabriel',posto:'1ten',tel:'(17) 99117-3480',ativo:true},
+  {nome:'1\u00ba Ten PM Cutis',posto:'1ten',tel:'(16) 99787-8497',ativo:true},
+  {nome:'1\u00ba Ten PM Severo',posto:'1ten',tel:'(17) 99727-8808',ativo:true},
+  {nome:'1\u00ba Ten PM Jean',posto:'1ten',tel:'(17) 99622-4021',ativo:true},
+  {nome:'1\u00ba Ten PM Tavella',posto:'1ten',tel:'(16) 99187-9246',ativo:true},
+  {nome:'2\u00ba Ten PM Ferraz',posto:'2ten',tel:'(16) 99755-2084',ativo:true}
 ];
 var responsaveis=[{nome:'Maj PM Danielly Priscila Nonis',ativo:true}];
 
@@ -566,33 +550,16 @@ var GRUPO_SEGQUI=new Set([1,2,3,4]);
 var GRUPO_FDS=new Set([0,6]);
 
 // Detecta ambiente
-var IS_FIREBASE=true; // Firebase Realtime Database backend
+var IS_FIREBASE=true;
 
-// ── Timer para auto-salvar na nuvem sem sobrecarregar (Firebase)
+// ── Timer auto-save Firebase
 var _saveTimer=null;
-function agendarSalvarNuvem(){
-  clearTimeout(_saveTimer);
-  _saveTimer=setTimeout(function(){_salvarNuvemAgora();},2000);
-}
-
+function agendarSalvarNuvem(){clearTimeout(_saveTimer);_saveTimer=setTimeout(_salvarNuvemAgora,2000);}
 function _salvarNuvemAgora(){
   var ym=mesSel.value;if(!ym)return;
-  var snap=capturarEscala();
-  var payload={
-    pelotoes:    snap,
-    permanencia: capturarPermAtual(),
-    responsavel: document.getElementById('resp-sel').value||'',
-    mes:         ym,
-    tenentes:    JSON.parse(JSON.stringify(tenentes)),
-    responsaveis:JSON.parse(JSON.stringify(responsaveis)),
-    log:         _logAtual,
-    updatedAt:   new Date().toISOString()
-  };
-  fbSet('escalas/'+ym, payload);
-  fbSet('listas/tenentes', tenentes);
-  fbSet('listas/responsaveis', responsaveis);
+  var payload={pelotoes:capturarEscala(),permanencia:capturarPermAtual(),responsavel:document.getElementById('resp-sel').value||'',mes:ym,tenentes:JSON.parse(JSON.stringify(tenentes)),responsaveis:JSON.parse(JSON.stringify(responsaveis)),log:_logAtual,updatedAt:new Date().toISOString()};
+  fbSet('escalas/'+ym,payload);fbSet('listas/tenentes',tenentes);fbSet('listas/responsaveis',responsaveis);
 }
-
 var _logAtual=[];
 var _permAtual={};
 
@@ -617,11 +584,7 @@ mesSel.addEventListener('change',function(){
   atualizarMesRef();
   _permAtual={};
   carregarMes();
-  // Re-attach Firebase listener for new month
-  try {
-    fbDB().ref('escalas/'+mesSel.value).off();
-  } catch(e){}
-  setTimeout(iniciarListener, 500);
+  setTimeout(iniciarListener,500);
 });
 
 function atualizarMesRef(){
@@ -658,18 +621,8 @@ function salvarDados(){
 // ── Carregamento do mês (Firebase)
 function carregarMes(){
   var ym=mesSel.value;if(!ym)return;
-  fbGet('escalas/'+ym, function(data){
-    fbGet('listas', function(listas){
-      var r={
-        escala: data,
-        tenentes: (listas&&listas.tenentes)||[],
-        responsaveis: (listas&&listas.responsaveis)||[]
-      };
-      _aplicarDadosCarregados(r);
-    });
-  });
+  fbGet('escalas/'+ym,function(data){fbGet('listas',function(listas){_aplicarDadosCarregados({escala:data,tenentes:(listas&&listas.tenentes)||[],responsaveis:(listas&&listas.responsaveis)||[]});});});
 }
-
 function _aplicarDadosCarregados(r){
   if(r.tenentes&&r.tenentes.length)tenentes=r.tenentes;
   if(r.responsaveis&&r.responsaveis.length)responsaveis=r.responsaveis;
@@ -687,7 +640,7 @@ function _aplicarDadosCarregados(r){
 
 function _aplicarEscalaCompleta(escala){
   aplicarEscala(escala.pelotoes||{});
-  if(escala.permanencia){ _permAtual=escala.permanencia; }
+  if(escala.permanencia){_permAtual=escala.permanencia;}
   if(escala.responsavel){
     var rSel=document.getElementById('resp-sel');
     var rVal=escala.responsavel;
@@ -719,13 +672,12 @@ function _carregarLocal(ym){
   }
   atualizarSummary();
   sincronizarPrint();
-  setTimeout(function(){ gerarDiasPermanencia(); }, 100);
 }
 
 // ── Captura e aplica escala
 function capturarEscala(){
   var snap={};
-  document.querySelectorAll('.pel-row').forEach(function(row){
+  document.querySelectorAll('.pel-row,.cmt-cia-row').forEach(function(row){
     var pid=row.dataset.pel;
     var cells=row.querySelectorAll('.scale-cell');
     snap[pid]={
@@ -745,12 +697,8 @@ function capturarEscala(){
   return snap;
 }
 
-function capturarPermAtual(){
-  return JSON.parse(JSON.stringify(_permAtual));
-}
-
 function aplicarEscala(snap){
-  document.querySelectorAll('.pel-row').forEach(function(row){
+  document.querySelectorAll('.pel-row,.cmt-cia-row').forEach(function(row){
     var pid=row.dataset.pel;if(!snap[pid])return;
     var d=snap[pid];
     var sel=row.querySelector('.cmt-sel');
@@ -792,7 +740,7 @@ function registrarLog(campo){
   document.getElementById('upd-dt').textContent=agora;
   document.getElementById('upd-what').textContent=campo;
   renderLog(_logAtual);
-  // Grava log imediatamente no Firebase
+
   agendarSalvarNuvem();
 }
 
@@ -811,10 +759,13 @@ function renderLog(log){
 function renderSelects(){
   document.querySelectorAll('select.cmt-sel').forEach(function(sel){
     var val=sel.value;
-    sel.innerHTML='<option value="">\u2014 Selecione o Tenente \u2014</option>';
-    // Apenas Oficiais activos aparecem para nova selecção
+    var _isCap=sel.classList.contains('cap-sel');
+    sel.innerHTML='<option value="">'+(_isCap?'\u2014 Selecione o Capit\u00e3o \u2014':'\u2014 Selecione o Tenente \u2014')+'</option>';
     tenentes.forEach(function(t){
       if(t.ativo===false) return;
+      var _pos=t.posto||'1ten';
+      if(_isCap && _pos!=='cap') return;
+      if(!_isCap && _pos==='cap') return;
       var o=document.createElement('option');
       o.value=t.nome;o.textContent=t.nome;
       sel.appendChild(o);
@@ -874,7 +825,7 @@ function atualizarTelDisplay(sel){
 }
 
 function onTenChange(sel){
-  var row=sel.closest('.pel-row');
+  var row=sel.closest('.pel-row')||sel.closest('.cmt-cia-row');
   atualizarTelDisplay(sel);
   sincronizarPrint();
   registrarLog(row.dataset.pel+' \u2014 Tenente: '+sel.value);
@@ -904,7 +855,9 @@ function renderModalTenentes(){
     var ativo=(t.ativo!==false);
     var li=document.createElement('li');li.className='ten-item';
     li.style.opacity=ativo?'1':'0.6';
-    li.innerHTML='<span class="ten-nome" style="'+(ativo?'':'text-decoration:line-through;color:#aaa;')+'">'+t.nome+'</span>'
+    var _bdg=t.posto==='cap'?'Cap':(t.posto==='2ten'?'2º Ten':'1º Ten');
+    var _bgc=t.posto==='cap'?'#7d4e00':'#0a1628';
+    li.innerHTML='<span style="background:'+_bgc+';color:#e8b84b;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;margin-right:5px;">'+_bdg+'</span><span class="ten-nome" style="'+(ativo?'':'text-decoration:line-through;color:#aaa;')+'">'+t.nome+'</span>'
       +'<span class="ten-fone">'+t.tel+'</span>'
       +'<button class="btn '+(ativo?'btn-red':'btn-teal')+' btn-del" style="font-size:11px;padding:3px 8px;min-width:70px;" onclick="toggleTenente('+i+')">'
       +(ativo?'\u25a0 Inativar':'\u25b6 Ativar')+'</button>';
@@ -918,7 +871,8 @@ function adicionarTenente(){
   if(tenentes.find(function(t){return t.nome.toLowerCase()===n.toLowerCase();})){
     notif('\u26a0 J\u00e1 cadastrado.');return;
   }
-  tenentes.push({nome:n,tel:f||'\u2014',ativo:true,ativo:true});
+  var _pp=document.getElementById('add-posto')?document.getElementById('add-posto').value||'1ten':'1ten';
+  tenentes.push({nome:n,posto:_pp,tel:f||'\u2014',ativo:true,ativo:true});
   tenentes.sort(function(a,b){return a.nome.localeCompare(b.nome);});
   document.getElementById('add-nome').value='';
   document.getElementById('add-fone').value='';
@@ -940,9 +894,8 @@ function toggleTenente(i){
 }
 function salvarListasNuvem(){
   salvarLocal();
-  fbSet('listas/tenentes', tenentes);
-  fbSet('listas/responsaveis', responsaveis);
-  notif('\u2714 Lista salva na nuvem.');
+  fbSet('listas/tenentes',tenentes);fbSet('listas/responsaveis',responsaveis);
+  notif('✔ Lista salva na nuvem.');
 }
 
 // ── Modal Responsáveis
@@ -1007,32 +960,18 @@ function renderModalHistorico(){
   document.getElementById('hist-content').innerHTML='';
   document.getElementById('log-box').innerHTML='';
 
-  // Firebase: lista meses salvos
-  fbGet('escalas', function(escalas){
-    sel.innerHTML='';
-    if(!escalas){
-      sel.innerHTML='<option value="">Nenhum m\u00eas salvo</option>';
-      document.getElementById('hist-content').innerHTML=
-        '<div class="hist-empty">Nenhuma escala salva ainda.</div>';
-      document.getElementById('log-box').innerHTML='';
-      return;
-    }
-    var meses=Object.keys(escalas).filter(function(k){return /^\d{4}-\d{2}$/.test(k);});
-    meses.sort().reverse();
-    if(!meses.length){
-      sel.innerHTML='<option value="">Nenhum m\u00eas salvo</option>';
-      document.getElementById('hist-content').innerHTML=
-        '<div class="hist-empty">Nenhuma escala salva ainda.</div>';
-      return;
-    }
-    meses.forEach(function(k){
-      var o=document.createElement('option');
-      o.value=k;o.textContent=nomeMes(k);
-      sel.appendChild(o);
+  if(IS_FIREBASE){
+    fbGet('escalas',function(escalas){
+      sel.innerHTML='';
+      if(!escalas){sel.innerHTML='<option value="">Nenhum mês salvo</option>';document.getElementById('hist-content').innerHTML='<div class="hist-empty">Nenhuma escala salva ainda.</div>';document.getElementById('log-box').innerHTML='';return;}
+      var meses=Object.keys(escalas).filter(function(k){return /^\d{4}-\d{2}$/.test(k);});
+      meses.sort().reverse();
+      if(!meses.length){sel.innerHTML='<option value="">Nenhum mês salvo</option>';return;}
+      meses.forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=nomeMes(k);sel.appendChild(o);});
+      renderHistorico();
     });
-    renderHistorico();
-  });
-  return;
+    return;
+  }
   // Local
   var keys=[];
   for(var i=0;i<localStorage.length;i++){
@@ -1061,12 +1000,12 @@ function renderHistorico(){
   var logBox=document.getElementById('log-box');
   if(!ym){cont.innerHTML='';logBox.innerHTML='';return;}
 
-  // Firebase
-  cont.innerHTML='<div class="hist-empty">\u23f3 Carregando...</div>';
-  fbGet('escalas/'+ym, function(data){
-    _renderHistContent(data, cont, logBox);
-  });
-  return;
+  if(IS_FIREBASE){
+    cont.innerHTML='<div class="hist-empty">\u23f3 Carregando...</div>';
+    cont.innerHTML='<div class="hist-empty">⏳ Carregando...</div>';
+    fbGet('escalas/'+ym,function(data){_renderHistContent(data,cont,logBox);});
+    return;
+  }
   var entry=JSON.parse(localStorage.getItem(chaveHist(ym))||'null');
   _renderHistContent(entry,cont,logBox);
 }
@@ -1212,27 +1151,10 @@ function limparEscala(){
 function salvarFicheiro(){
   sincronizarPrint();
   var ym=mesSel.value||'';
-  var snap=capturarEscala();
-  var dados={
-    pelotoes:    snap,
-    permanencia: capturarPermAtual(),
-    responsavel: document.getElementById('resp-sel').value||'',
-    mes:         ym,
-    tenentes:    JSON.parse(JSON.stringify(tenentes)),
-    responsaveis:JSON.parse(JSON.stringify(responsaveis)),
-    log:         _logAtual,
-    updatedAt:   new Date().toISOString()
-  };
-  notif('\u23f3 Salvando...');
-  // Salva escala e listas no Firebase
-  fbSet('escalas/'+ym, dados, function(){
-    fbSet('listas/tenentes', tenentes);
-    fbSet('listas/responsaveis', responsaveis, function(){
-      notif('\u2714 Escala salva na nuvem!');
-    });
-  });
+  var dados={pelotoes:capturarEscala(),permanencia:capturarPermAtual(),responsavel:document.getElementById('resp-sel').value||'',mes:ym,tenentes:JSON.parse(JSON.stringify(tenentes)),responsaveis:JSON.parse(JSON.stringify(responsaveis)),log:_logAtual,updatedAt:new Date().toISOString()};
+  notif('⏳ Salvando...');
+  fbSet('escalas/'+ym,dados,function(){fbSet('listas/tenentes',tenentes);fbSet('listas/responsaveis',responsaveis,function(){notif('✔ Escala salva na nuvem!');});});
 }
-
 // ── Imprimir
 function mostrarInstrucaoImpressao(){
   // Captura dados actuais
@@ -1276,7 +1198,7 @@ function mostrarInstrucaoImpressao(){
     + '@media print{body{margin:8px;}.no-print{display:none;}}'
     + '</style></head><body>'
     + '<div class="hdr">'
-    + '<h1>ESCALA DE RONDA — COMANDANTES DE PELOTÃO</h1>'
+    + '<h1>ESCALA DE OFICIAIS</h1>'
     + '<p>Polícia Militar do Estado de São Paulo &nbsp;·&nbsp; '
     + 'Comando de Policiamento Rodoviário &nbsp;·&nbsp; '
     + '3º Batalhão de Polícia Rodoviária &nbsp;·&nbsp; '+nMes+'</p>'
@@ -1370,12 +1292,9 @@ function vincularEventos(){
   });
 }
 
-// ── Garantia final: gera dias quando página está 100% carregada
-window.addEventListener('load', function(){
-  setTimeout(function(){ gerarDiasPermanencia(); }, 300);
-});
-
 // ── Init
+window.addEventListener('load',function(){setTimeout(function(){gerarDiasPermanencia();},300);});
+
 (function init(){
   // Carrega imagens via JS após o DOM estar pronto (não bloqueia impressão)
   var logoEl = document.getElementById('logo-img');
@@ -1393,33 +1312,24 @@ window.addEventListener('load', function(){
     atualizarSummary();sincronizarPrint();
     return;
   }
-  // Firebase init: carrega listas e depois a escala do mês actual
-  renderSelects();
-  vincularEventos();
-  atualizarSummary();
-  // Gera dias após DOM e Firebase estarem prontos
-  setTimeout(function(){ gerarDiasPermanencia(); }, 200);
-  // Carrega listas globais primeiro
-  fbGet('listas', function(listas){
-    if(listas){
-      if(listas.tenentes&&listas.tenentes.length){tenentes=listas.tenentes;renderSelects();}
-      if(listas.responsaveis&&listas.responsaveis.length){responsaveis=listas.responsaveis;renderRespSelect();}
-    }
-    // Depois carrega a escala do mês actual
+  if(IS_FIREBASE){
     var ym=mesSel.value;
-    fbGet('escalas/'+ym, function(data){
-      if(data){
-        _aplicarEscalaCompleta(data);
-      }else{
-        _logAtual=[];renderLog([]);
-      }
-      atualizarSummary();sincronizarPrint();
-      gerarDiasPermanencia();
-      // Activa listener em tempo real
-      iniciarListener();
+    // Renderiza imediatamente com dados padrão (não espera pelo servidor)
+    renderSelects();
+    vincularEventos();
+    atualizarSummary();
+    // Depois actualiza com dados do servidor quando disponíveis
+    fbGet('listas',function(listas){
+      if(listas){if(listas.tenentes&&listas.tenentes.length){tenentes=listas.tenentes;renderSelects();}if(listas.responsaveis&&listas.responsaveis.length){responsaveis=listas.responsaveis;renderRespSelect();}}
+      fbGet('escalas/'+mesSel.value,function(data){
+        if(data){_aplicarEscalaCompleta(data);}else{_logAtual=[];renderLog([]);}
+        atualizarSummary();sincronizarPrint();
+        setTimeout(function(){gerarDiasPermanencia();},100);
+        iniciarListener();
+      });
     });
-  });
-  return;
+    return;
+  }
   // Local
   try{
     var st=localStorage.getItem('bprv_tenentes');
