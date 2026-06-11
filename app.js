@@ -16,17 +16,25 @@ function iniciarListener(){
 }
 // ── Permanencia
 function gerarDiasPermanencia(){
-  var ym=mesSel.value;
+  var ym=mesSel?mesSel.value:'';
   if(!ym){var _nn=new Date();ym=_nn.getFullYear()+'-'+String(_nn.getMonth()+1).padStart(2,'0');}
   var _p2=ym.split('-'),_a2=parseInt(_p2[0]),_m2=parseInt(_p2[1]),_t2=new Date(_a2,_m2,0).getDate();
+  if(!_t2||_t2<1||_t2>31)return;
   document.querySelectorAll('.perm-days').forEach(function(c){
-    var pid=c.closest('[data-perm]').dataset.perm,pd=_permAtual[pid]||[];
+    // get data-perm from parent element directly
+    var row=c.parentElement;
+    if(!row||!row.dataset||!row.dataset.perm)return;
+    var pid=row.dataset.perm;
+    var pd=_permAtual[pid]||[];
     c.innerHTML='';
     for(var d=1;d<=_t2;d++){
       var b=document.createElement('div');
       b.className='perm-day'+(pd.indexOf(d)>=0?' marcado':'');
       b.textContent=d;b.dataset.dia=d;b.dataset.pel=pid;
-      b.addEventListener('click',function(){togglePermDia(this.dataset.pel,parseInt(this.dataset.dia));this.classList.toggle('marcado');});
+      b.addEventListener('click',function(){
+        togglePermDia(this.dataset.pel,parseInt(this.dataset.dia));
+        this.classList.toggle('marcado');
+      });
       c.appendChild(b);
     }
   });
@@ -167,6 +175,7 @@ function _aplicarDadosCarregados(r){
 function _aplicarEscalaCompleta(escala){
   aplicarEscala(escala.pelotoes||{});
   if(escala.permanencia){_permAtual=escala.permanencia;}
+  setTimeout(function(){gerarDiasPermanencia();},50);
   if(escala.responsavel){
     var rSel=document.getElementById('resp-sel');
     var rVal=escala.responsavel;
