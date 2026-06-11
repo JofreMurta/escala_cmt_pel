@@ -819,7 +819,19 @@ function vincularEventos(){
 }
 
 // ── Init
-window.addEventListener('load',function(){setTimeout(function(){gerarDiasPermanencia();},300);});
+window.addEventListener('load',function(){
+  // Tenta gerar os dias várias vezes para garantir que aparecem
+  var _tentativas=0;
+  var _intervalo=setInterval(function(){
+    _tentativas++;
+    gerarDiasPermanencia();
+    // Verifica se os dias foram criados
+    var primeiro=document.querySelector('.perm-days');
+    if((primeiro&&primeiro.children.length>0)||_tentativas>=10){
+      clearInterval(_intervalo);
+    }
+  },200);
+});
 
 (function init(){
   // Carrega imagens via JS após o DOM estar pronto (não bloqueia impressão)
