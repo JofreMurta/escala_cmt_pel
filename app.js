@@ -625,16 +625,7 @@ function recalcStatus(cell){
 }
 
 function atualizarSummary(){
-  var cells=document.querySelectorAll('.scale-cell');
-  var ok=0;
-  cells.forEach(function(c){
-    if(c.querySelector('.scale-status')&&
-       c.querySelector('.scale-status').classList.contains('status-ok'))ok++;
-  });
-  document.getElementById('s-cmts').textContent=tenentes.length;
-  document.getElementById('s-meta').textContent=cells.length;
-  document.getElementById('s-prog').textContent=ok;
-  document.getElementById('s-pend').textContent=cells.length-ok;
+  // Summary bar removida -- função mantida para compatibilidade
 }
 
 function sincronizarPrint(){
@@ -866,6 +857,3 @@ window.addEventListener('load',function(){setTimeout(function(){gerarDiasPermane
   renderSelects();vincularEventos();
   _carregarLocal(mesSel.value);
 })();
-
-
-
