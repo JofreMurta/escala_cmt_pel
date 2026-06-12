@@ -279,7 +279,12 @@ if(cells.length < 2){
 if(cells.length < 2){
     return;
 }
-
+console.log(
+  "SALVANDO",
+  pid,
+  "TEN:",
+  cmtSel.value
+);
 snap[pid]={
       ten:row.querySelector('.cmt-sel').value,
       s1:{
