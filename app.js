@@ -283,7 +283,16 @@ if(cells.length < 2){
     pid,
     row.querySelectorAll('.scale-cell').length
 );
-    var cells=row.querySelectorAll('.scale-cell');
+   var cells=row.querySelectorAll('.scale-cell');
+
+if(row.classList.contains('cmt-cia-row')){
+
+    snap[pid]={
+        ten:cmtSel.value
+    };
+
+    return;
+}
 
 if(cells.length < 2){
     return;
