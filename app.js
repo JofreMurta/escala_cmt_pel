@@ -885,7 +885,6 @@ window.addEventListener('load',function(){
   },200);
 
 });
-});
 
 (function init(){
   // Carrega imagens via JS após o DOM estar pronto (não bloqueia impressão)
