@@ -89,11 +89,13 @@ function gerarDiasPermanencia(){
 
         b.addEventListener('click',function(){
 
-            togglePermDia(pelId,dia);
+    console.log("CLIQUE", pelId, dia);
 
-            b.classList.toggle('marcado');
+    togglePermDia(pelId,dia);
 
-        });
+    b.classList.toggle('marcado');
+
+});
 
                 c.appendChild(b);
 
