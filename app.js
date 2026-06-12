@@ -795,117 +795,22 @@ function mostrarInstrucaoImpressao(){
   var mes  = mesSel.value || '';
   var nMes = nomeMes(mes);
   var resp = document.getElementById('resp-sel').value || '—';
-
-  // Helper: formata lista de dias a partir de _permAtual
-  function diasStr(chave){
-    var arr = _permAtual[chave] || [];
-    return arr.length ? arr.join(', ') : '—';
-  }
-  // Helper: formata escala (dia + data + hora)
-  function escStr(s){
-    return s ? ((s.dia||'')+' '+(s.dt||'')+' '+(s.hr||'')).trim()||'—' : '—';
-  }
-
-  // Define a ordem das Companhias e os respetivos pelotões
-  var cias = [
-    {nome:'1ª COMPANHIA · Araraquara', cmt:'1ª Cia - Cmt',
-      peis:['1ª Cia - 1º Pel','1ª Cia - 2º Pel','1ª Cia - 3º Pel']},
-    {nome:'2ª COMPANHIA · Rio Claro', cmt:'2ª Cia - Cmt',
-      peis:['2ª Cia - 1º Pel','2ª Cia - 2º Pel']},
-    {nome:'3ª COMPANHIA · São José do Rio Preto', cmt:'3ª Cia - Cmt',
-      peis:['3ª Cia - 1º Pel','3ª Cia - 2º e 3º Pel','3ª Cia - TOR']},
-    {nome:'4ª COMPANHIA · Ribeirão Preto', cmt:'4ª Cia - Cmt',
-      peis:['4ª Cia - 1º Pel','4ª Cia - 2º Pel','4ª Cia - 3º Pel']}
-  ];
-
-  var tabelas = '';
-  cias.forEach(function(cia){
-    // Linha do Cmt de Cia (destaque)
-    var dCmt = snap[cia.cmt] || {};
-    var cmtRow = '<tr class="cmt-line">'
-      + '<td><strong>CMT DE CIA</strong></td>'
-      + '<td>'+(dCmt.ten||'—')+'</td>'
-      + '<td colspan="2" style="text-align:center;font-style:italic;color:#888;">Sup. Regional / Operações abaixo</td>'
-      + '<td>'+diasStr(cia.cmt)+'</td>'
-      + '<td>'+diasStr('op-'+cia.cmt)+'</td>'
+  // Monta linhas da tabela
+  var rows = '';
+  var peis = Object.keys(snap);
+  for(var i=0;i<peis.length;i++){
+    var pid = peis[i];
+    var d   = snap[pid];
+    var ten = d.ten || '—';
+    var s1  = d.s1 ? ((d.s1.dia||'')+' '+(d.s1.dt||'')+' '+(d.s1.hr||'')).trim() : '—';
+    var s2  = d.s2 ? ((d.s2.dia||'')+' '+(d.s2.dt||'')+' '+(d.s2.hr||'')).trim() : '—';
+    rows += '<tr>'
+      + '<td>'+pid+'</td>'
+      + '<td>'+ten+'</td>'
+      + '<td>'+(s1||'—')+'</td>'
+      + '<td>'+(s2||'—')+'</td>'
       + '</tr>';
-
-    // Linhas dos Pelotões
-    var pelRows = '';
-    cia.peis.forEach(function(pid){
-      var d = snap[pid] || {};
-      pelRows += '<tr>'
-        + '<td>'+pid.split(' - ').pop()+'</td>'
-        + '<td>'+(d.ten||'—')+'</td>'
-        + '<td>'+escStr(d.s1)+'</td>'
-        + '<td>'+escStr(d.s2)+'</td>'
-        + '<td>'+diasStr(pid)+'</td>'
-        + '<td>'+diasStr('op-'+pid)+'</td>'
-        + '</tr>';
-    });
-
-    tabelas += '<div class="cia-title">'+cia.nome+'</div>'
-      + '<table>'
-      + '<thead><tr>'
-      + '<th style="width:14%;">Função</th>'
-      + '<th style="width:22%;">Oficial</th>'
-      + '<th style="width:18%;">Seg–Qui</th>'
-      + '<th style="width:18%;">Sáb/Dom</th>'
-      + '<th style="width:14%;">Permanência / Sup.Reg.</th>'
-      + '<th style="width:14%;">Operações</th>'
-      + '</tr></thead>'
-      + '<tbody>'+cmtRow+pelRows+'</tbody>'
-      + '</table>';
-  });
-
-  // Monta HTML da janela de impressão
-  var html = '<!DOCTYPE html><html lang="pt-BR"><head>'
-    + '<meta charset="UTF-8">'
-    + '<title>Escala de Oficiais – '+nMes+'</title>'
-    + '<style>'
-    + 'body{font-family:Arial,sans-serif;margin:20px;color:#000;}'
-    + '.hdr{background:#0a1628;color:#fff;padding:14px 20px;border-bottom:4px solid #c8992a;margin-bottom:14px;}'
-    + '.hdr h1{margin:0;font-size:17px;letter-spacing:1px;}'
-    + '.hdr p{margin:3px 0 0;font-size:11px;color:#e8b84b;}'
-    + '.info{font-size:12px;margin:4px 0;}'
-    + '.cia-title{font-size:13px;font-weight:bold;background:#0a1628;color:#fff;padding:6px 10px;margin-top:14px;border-left:4px solid #c8992a;}'
-    + 'table{width:100%;border-collapse:collapse;margin-top:0;}'
-    + 'th{background:#1e3a5f;color:#fff;padding:6px 8px;text-align:left;font-size:11px;border:1px solid #ccc;}'
-    + 'td{padding:6px 8px;font-size:11px;border:1px solid #ccc;vertical-align:top;}'
-    + 'tr:nth-child(even){background:#f5f7fa;}'
-    + 'tr.cmt-line td{background:#fff7e6!important;font-weight:600;}'
-    + '.ftr{font-size:10px;color:#888;margin-top:16px;border-top:1px solid #ddd;padding-top:8px;}'
-    + '@media print{body{margin:8px;}.no-print{display:none;}.cia-title,table{page-break-inside:avoid;}}'
-    + '</style></head><body>'
-    + '<div class="hdr">'
-    + '<h1>ESCALA DE OFICIAIS</h1>'
-    + '<p>Polícia Militar do Estado de São Paulo &nbsp;·&nbsp; '
-    + 'Comando de Policiamento Rodoviário &nbsp;·&nbsp; '
-    + '3º Batalhão de Polícia Rodoviária &nbsp;·&nbsp; '+nMes+'</p>'
-    + '</div>'
-    + '<p class="info"><strong>Responsável:</strong> '+resp+'</p>'
-    + '<p class="info"><strong>Referência:</strong> NI Nº CPRv-004/300/23 — OS Nº 3BPRv-039/03/2023</p>'
-    + tabelas
-    + '<div class="ftr">'
-    + 'Prazo de atualização: até o dia 24 do mês anterior &nbsp;|&nbsp; '
-    + 'E-mail: 3bprvp3@policiamilitar.sp.gov.br &nbsp;|&nbsp; '
-    + 'OS Nº 3BPRv-039/03/2023, item 2.2.2.1'
-    + '</div>'
-    + '<div class="no-print" style="margin-top:20px;text-align:center;">'
-    + '<button onclick="window.print();" style="background:#0a1628;color:#fff;border:none;padding:10px 28px;font-size:14px;border-radius:4px;cursor:pointer;margin-right:10px;">🖨 Imprimir</button>'
-    + '<button onclick="window.close();" style="background:#888;color:#fff;border:none;padding:10px 28px;font-size:14px;border-radius:4px;cursor:pointer;">✕ Fechar</button>'
-    + '</div>'
-    + '</body></html>';
-
-  // Abre nova janela com o resumo
-  var win = window.open('','_blank','width=900,height=720,scrollbars=yes');
-  if(win){
-    win.document.write(html);
-    win.document.close();
-  } else {
-    notif('⚠ Permita pop-ups e tente novamente.');
   }
-}
 
   // Monta HTML da janela de impressao
   var html = '<!DOCTYPE html><html lang="pt-BR"><head>'
