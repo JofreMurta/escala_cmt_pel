@@ -71,16 +71,33 @@ function gerarDiasPermanencia(){
 
     for(var d=1; d<=totalDias; d++){
 
-      var b=document.createElement('div');
+    (function(dia){
 
-      b.className='perm-day';
-      b.textContent=d;
+        var b=document.createElement('div');
 
-      c.appendChild(b);
-    }
+        b.className='perm-day';
+        b.textContent=dia;
 
-    console.log("Dias criados com sucesso");
-  });
+        var pelId=row.dataset.perm;
+
+        if(
+            _permAtual[pelId] &&
+            _permAtual[pelId].indexOf(dia)>=0
+        ){
+            b.classList.add('selected');
+        }
+
+        b.addEventListener('click',function(){
+
+            togglePermDia(pelId,dia);
+
+            b.classList.toggle('selected');
+
+        });
+
+        c.appendChild(b);
+
+    })(d);
 
 }
 function togglePermDia(pelId,dia){
