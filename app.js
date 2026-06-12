@@ -305,6 +305,12 @@ snap[pid]={
 function aplicarEscala(snap){
   document.querySelectorAll('.pel-row,.cmt-cia-row').forEach(function(row){
     var pid=row.dataset.pel;if(!snap[pid])return;
+    console.log(
+    "PID:",
+    pid,
+    "DADOS:",
+    snap[pid]
+);
     var d=snap[pid];
     var sel=row.querySelector('.cmt-sel');
     var nomeTen=d.ten||'';
@@ -321,6 +327,11 @@ function aplicarEscala(snap){
         sel.appendChild(oInativo);
       }
     }
+    console.log(
+  "APLICANDO",
+  pid,
+  nomeTen
+);
     sel.value=nomeTen;
     atualizarTelDisplay(sel);
     var cells=row.querySelectorAll('.scale-cell');
