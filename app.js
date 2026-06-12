@@ -81,20 +81,19 @@ function gerarDiasPermanencia(){
         var pelId=row.dataset.perm;
 
         if(
-            if(
-    _permAtual[pelId] &&
-    _permAtual[pelId].indexOf(dia)>=0
-){
-    b.classList.add('marcado');
-}
+            _permAtual[pelId] &&
+            _permAtual[pelId].indexOf(dia)>=0
+        ){
+            b.classList.add('marcado');
+        }
 
-b.addEventListener('click',function(){
+        b.addEventListener('click',function(){
 
-    togglePermDia(pelId,dia);
+            togglePermDia(pelId,dia);
 
-    b.classList.toggle('marcado');
+            b.classList.toggle('marcado');
 
-});
+        });
 
         c.appendChild(b);
 
