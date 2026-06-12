@@ -16,28 +16,66 @@ function iniciarListener(){
 }
 // ── Permanencia
 function gerarDiasPermanencia(){
-  var ym=mesSel?mesSel.value:'';
-  if(!ym){var _nn=new Date();ym=_nn.getFullYear()+'-'+String(_nn.getMonth()+1).padStart(2,'0');}
-  var _p2=ym.split('-'),_a2=parseInt(_p2[0]),_m2=parseInt(_p2[1]),_t2=new Date(_a2,_m2,0).getDate();
-  if(!_t2||_t2<1||_t2>31)return;
-  document.querySelectorAll('.perm-days').forEach(function(c){
-    // get data-perm from parent element directly
-    var row=c.parentElement;
-    if(!row||!row.dataset||!row.dataset.perm)return;
-    var pid=row.dataset.perm;
-    var pd=_permAtual[pid]||[];
+
+  console.log("=== GERAR DIAS ===");
+
+  var ym = mesSel ? mesSel.value : '';
+
+  console.log("Mês selecionado:", ym);
+
+  if(!ym){
+    var agora = new Date();
+    ym = agora.getFullYear() + '-' +
+         String(agora.getMonth()+1).padStart(2,'0');
+  }
+
+  var partes = ym.split('-');
+  var ano = parseInt(partes[0]);
+  var mes = parseInt(partes[1]);
+
+  var totalDias = new Date(ano, mes, 0).getDate();
+
+  console.log("Dias do mês:", totalDias);
+
+  var containers = document.querySelectorAll('.perm-days');
+
+  console.log("Quantidade de .perm-days:", containers.length);
+
+  containers.forEach(function(c){
+
+    console.log("----------------");
+    console.log("Container:", c.id);
+
+    var row = c.parentElement;
+
+    if(!row){
+      console.log("ERRO: pai não encontrado");
+      return;
+    }
+
+    console.log("Classe pai:", row.className);
+    console.log("data-perm:", row.dataset.perm);
+
+    if(!row.dataset.perm){
+      console.log("ERRO: data-perm inexistente");
+      return;
+    }
+
     c.innerHTML='';
-    for(var d=1;d<=_t2;d++){
+
+    for(var d=1; d<=totalDias; d++){
+
       var b=document.createElement('div');
-      b.className='perm-day'+(pd.indexOf(d)>=0?' marcado':'');
-      b.textContent=d;b.dataset.dia=d;b.dataset.pel=pid;
-      b.addEventListener('click',function(){
-        togglePermDia(this.dataset.pel,parseInt(this.dataset.dia));
-        this.classList.toggle('marcado');
-      });
+
+      b.className='perm-day';
+      b.textContent=d;
+
       c.appendChild(b);
     }
+
+    console.log("Dias criados com sucesso");
   });
+
 }
 function togglePermDia(pelId,dia){
   if(!_permAtual[pelId])_permAtual[pelId]=[];
@@ -820,17 +858,33 @@ function vincularEventos(){
 
 // ── Init
 window.addEventListener('load',function(){
-  // Tenta gerar os dias várias vezes para garantir que aparecem
+
+  console.log("PÁGINA CARREGADA");
+
   var _tentativas=0;
+
   var _intervalo=setInterval(function(){
+
     _tentativas++;
+
+    console.log("Tentativa:", _tentativas);
+
     gerarDiasPermanencia();
-    // Verifica se os dias foram criados
+
     var primeiro=document.querySelector('.perm-days');
-    if((primeiro&&primeiro.children.length>0)||_tentativas>=10){
+
+    console.log("Primeiro container:", primeiro);
+
+    if((primeiro && primeiro.children.length>0) || _tentativas>=10){
+
+      console.log("INTERVALO ENCERRADO");
+
       clearInterval(_intervalo);
     }
+
   },200);
+
+});
 });
 
 (function init(){
