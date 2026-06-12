@@ -17,11 +17,7 @@ function iniciarListener(){
 // ── Permanencia
 function gerarDiasPermanencia(){
 
-  console.log("=== GERAR DIAS ===");
-
   var ym = mesSel ? mesSel.value : '';
-
-  console.log("Mês selecionado:", ym);
 
   if(!ym){
     var agora = new Date();
@@ -34,36 +30,14 @@ function gerarDiasPermanencia(){
   var mes = parseInt(partes[1]);
 
   var totalDias = new Date(ano, mes, 0).getDate();
-  console.log(
-   "Mês:",
-   ym,
-   "Dias:",
-   totalDias
-);
-
-  console.log("Dias do mês:", totalDias);
 
   var containers = document.querySelectorAll('.perm-days');
 
-  console.log("Quantidade de .perm-days:", containers.length);
-
   containers.forEach(function(c){
-
-    console.log("----------------");
-    console.log("Container:", c.id);
 
     var row = c.parentElement;
 
-    if(!row){
-      console.log("ERRO: pai não encontrado");
-      return;
-    }
-
-    console.log("Classe pai:", row.className);
-    console.log("data-perm:", row.dataset.perm);
-
-    if(!row.dataset.perm){
-      console.log("ERRO: data-perm inexistente");
+    if(!row || !row.dataset.perm){
       return;
     }
 
@@ -71,7 +45,7 @@ function gerarDiasPermanencia(){
 
     for(var d=1; d<=totalDias; d++){
 
-    (function(dia){
+      (function(dia){
 
         var b=document.createElement('div');
 
@@ -81,25 +55,23 @@ function gerarDiasPermanencia(){
         var pelId=row.dataset.perm;
 
         if(
-            _permAtual[pelId] &&
-            _permAtual[pelId].indexOf(dia)>=0
+          _permAtual[pelId] &&
+          _permAtual[pelId].indexOf(dia)>=0
         ){
-            b.classList.add('marcado');
+          b.classList.add('marcado');
         }
 
         b.addEventListener('click',function(){
 
-    console.log("CLIQUE", pelId, dia);
+          togglePermDia(pelId,dia);
 
-    togglePermDia(pelId,dia);
+          b.classList.toggle('marcado');
 
-    b.classList.toggle('marcado');
+        });
 
-});
+        c.appendChild(b);
 
-                c.appendChild(b);
-
-    })(d);
+      })(d);
 
     }
 
