@@ -267,6 +267,15 @@ if(!cmtSel){
 
 var cells=row.querySelectorAll('.scale-cell');
 
+if(row.classList.contains('cmt-cia-row')){
+
+    snap[pid]={
+        ten:cmtSel.value
+    };
+
+    return;
+}
+
 if(cells.length < 2){
     return;
 }
@@ -334,6 +343,14 @@ function aplicarEscala(snap){
 );
     sel.value=nomeTen;
     atualizarTelDisplay(sel);
+    if(row.classList.contains('cmt-cia-row')){
+
+    sel.value=d.ten || '';
+
+    atualizarTelDisplay(sel);
+
+    return;
+}
     var cells=row.querySelectorAll('.scale-cell');
     [cells[0],cells[1]].forEach(function(c,idx){
       var s=idx===0?d.s1:d.s2;
