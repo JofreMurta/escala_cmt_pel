@@ -796,20 +796,64 @@ function mostrarInstrucaoImpressao(){
   var nMes = nomeMes(mes);
   var resp = document.getElementById('resp-sel').value || '—';
   // Monta linhas da tabela
-  var rows = '';
-  var peis = Object.keys(snap);
-  for(var i=0;i<peis.length;i++){
-    var pid = peis[i];
-    var d   = snap[pid];
-    var ten = d.ten || '—';
-    var s1  = d.s1 ? ((d.s1.dia||'')+' '+(d.s1.dt||'')+' '+(d.s1.hr||'')).trim() : '—';
-    var s2  = d.s2 ? ((d.s2.dia||'')+' '+(d.s2.dt||'')+' '+(d.s2.hr||'')).trim() : '—';
-    rows += '<tr>'
-      + '<td>'+pid+'</td>'
-      + '<td>'+ten+'</td>'
-      + '<td>'+(s1||'—')+'</td>'
-      + '<td>'+(s2||'—')+'</td>'
+  // Helpers
+  function diasStr(chave){
+    var arr = _permAtual[chave] || [];
+    return arr.length ? arr.join(', ') : '—';
+  }
+  function escStr(s){
+    return s ? (((s.dia||'')+' '+(s.dt||'')+' '+(s.hr||'')).trim()||'—') : '—';
+  }
+
+  // Estrutura das Companhias (chaves exatamente como no data-pel)
+  var cias = [
+    {nome:'1ª COMPANHIA · Araraquara', cmt:'1ª Cia - Cmt',
+      peis:['1ª Cia - 1º Pel','1ª Cia - 2º Pel','1ª Cia - 3º Pel']},
+    {nome:'2ª COMPANHIA · Rio Claro', cmt:'2ª Cia - Cmt',
+      peis:['2ª Cia - 1º Pel','2ª Cia - 2º Pel']},
+    {nome:'3ª COMPANHIA · São José do Rio Preto', cmt:'3ª Cia - Cmt',
+      peis:['3ª Cia - 1º Pel','3ª Cia - 2º e 3º Pel','3ª Cia - TOR']},
+    {nome:'4ª COMPANHIA · Ribeirão Preto', cmt:'4ª Cia - Cmt',
+      peis:['4ª Cia - 1º Pel','4ª Cia - 2º Pel','4ª Cia - 3º Pel']}
+  ];
+
+  var tabelas = '';
+  for(var c=0;c<cias.length;c++){
+    var cia = cias[c];
+    var dCmt = snap[cia.cmt] || {};
+    var cmtRow = '<tr class="cmt-line">'
+      + '<td><strong>CMT DE CIA</strong></td>'
+      + '<td>'+(dCmt.ten||'—')+'</td>'
+      + '<td>—</td>'
+      + '<td>—</td>'
+      + '<td>'+diasStr(cia.cmt)+'</td>'
+      + '<td>'+diasStr('op-'+cia.cmt)+'</td>'
       + '</tr>';
+    var pelRows = '';
+    for(var p=0;p<cia.peis.length;p++){
+      var pid = cia.peis[p];
+      var d = snap[pid] || {};
+      pelRows += '<tr>'
+        + '<td>'+pid.split(' - ').pop()+'</td>'
+        + '<td>'+(d.ten||'—')+'</td>'
+        + '<td>'+escStr(d.s1)+'</td>'
+        + '<td>'+escStr(d.s2)+'</td>'
+        + '<td>'+diasStr(pid)+'</td>'
+        + '<td>'+diasStr('op-'+pid)+'</td>'
+        + '</tr>';
+    }
+    tabelas += '<div class="cia-title">'+cia.nome+'</div>'
+      + '<table>'
+      + '<thead><tr>'
+      + '<th style="width:14%;">Função</th>'
+      + '<th style="width:22%;">Oficial</th>'
+      + '<th style="width:18%;">Seg–Qui</th>'
+      + '<th style="width:18%;">Sáb/Dom</th>'
+      + '<th style="width:14%;">Perm. / Sup.Reg.</th>'
+      + '<th style="width:14%;">Operações</th>'
+      + '</tr></thead>'
+      + '<tbody>'+cmtRow+pelRows+'</tbody>'
+      + '</table>';
   }
 
   // Monta HTML da janela de impressao
@@ -825,7 +869,9 @@ function mostrarInstrucaoImpressao(){
     + 'table{width:100%;border-collapse:collapse;margin-top:12px;}'
     + 'th{background:#0a1628;color:#fff;padding:8px 10px;text-align:left;font-size:12px;border:1px solid #ccc;}'
     + 'td{padding:7px 10px;font-size:12px;border:1px solid #ccc;vertical-align:top;}'
-    + 'tr:nth-child(even){background:#f5f7fa;}'
+   + 'tr:nth-child(even){background:#f5f7fa;}'
+    + '.cia-title{font-size:13px;font-weight:bold;background:#0a1628;color:#fff;padding:6px 10px;margin-top:14px;border-left:4px solid #c8992a;}'
+    + 'tr.cmt-line td{background:#fff7e6!important;font-weight:600;}'
     + '.ftr{font-size:10px;color:#888;margin-top:16px;border-top:1px solid #ddd;padding-top:8px;}'
     + '@media print{body{margin:8px;}.no-print{display:none;}}'
     + '</style></head><body>'
@@ -837,15 +883,7 @@ function mostrarInstrucaoImpressao(){
     + '</div>'
     + '<p class="info"><strong>Responsável:</strong> '+resp+'</p>'
     + '<p class="info"><strong>Referência:</strong> NI Nº CPRv-004/300/23 — OS Nº 3BPRv-039/03/2023</p>'
-    + '<table>'
-    + '<thead><tr>'
-    + '<th style="width:22%;">Pelotão</th>'
-    + '<th style="width:28%;">Tenente</th>'
-    + '<th style="width:25%;">Seg–Qui</th>'
-    + '<th style="width:25%;">Sáb/Dom</th>'
-    + '</tr></thead>'
-    + '<tbody>'+rows+'</tbody>'
-    + '</table>'
+   + tabelas
     + '<div class="ftr">'
     + 'Prazo de atualização: até o dia 24 do mês anterior &nbsp;|&nbsp; '
     + 'E-mail: 3bprvp3@policiamilitar.sp.gov.br &nbsp;|&nbsp; '
