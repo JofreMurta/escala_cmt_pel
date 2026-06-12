@@ -34,6 +34,12 @@ function gerarDiasPermanencia(){
   var mes = parseInt(partes[1]);
 
   var totalDias = new Date(ano, mes, 0).getDate();
+  console.log(
+   "Mês:",
+   ym,
+   "Dias:",
+   totalDias
+);
 
   console.log("Dias do mês:", totalDias);
 
@@ -141,10 +147,21 @@ var hoje=new Date();
 mesSel.value=hoje.getFullYear()+'-'+String(hoje.getMonth()+1).padStart(2,'0');
 atualizarMesRef();
 mesSel.addEventListener('change',function(){
+
   atualizarMesRef();
+
   _permAtual={};
+
   carregarMes();
-  setTimeout(iniciarListener,500);
+
+  setTimeout(function(){
+
+      gerarDiasPermanencia();
+
+      iniciarListener();
+
+  },500);
+
 });
 
 function atualizarMesRef(){
