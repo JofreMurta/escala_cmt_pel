@@ -95,17 +95,28 @@ function gerarDiasPermanencia(){
 
         });
 
-        c.appendChild(b);
+                c.appendChild(b);
 
     })(d);
 
+    }
+
+  });
+
 }
+
 function togglePermDia(pelId,dia){
   if(!_permAtual[pelId])_permAtual[pelId]=[];
   var i=_permAtual[pelId].indexOf(dia);
   if(i>=0)_permAtual[pelId].splice(i,1);
-  else{_permAtual[pelId].push(dia);_permAtual[pelId].sort(function(a,b){return a-b;});}
-  salvarDados();agendarSalvarNuvem();
+  else{
+      _permAtual[pelId].push(dia);
+      _permAtual[pelId].sort(function(a,b){
+          return a-b;
+      });
+  }
+  salvarDados();
+  agendarSalvarNuvem();
 }
 function capturarPermAtual(){return JSON.parse(JSON.stringify(_permAtual));}
 
