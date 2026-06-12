@@ -259,6 +259,17 @@ function capturarEscala(){
   var snap={};
   document.querySelectorAll('.pel-row,.cmt-cia-row').forEach(function(row){
     var pid=row.dataset.pel;
+    var cmtSel=row.querySelector('.cmt-sel');
+
+if(!cmtSel){
+    return;
+}
+
+var cells=row.querySelectorAll('.scale-cell');
+
+if(cells.length < 2){
+    return;
+}
     console.log(
     pid,
     row.querySelectorAll('.scale-cell').length
