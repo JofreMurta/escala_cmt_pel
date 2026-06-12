@@ -87,18 +87,18 @@ function togglePermDia(pelId,dia){
 function capturarPermAtual(){return JSON.parse(JSON.stringify(_permAtual));}
 
     fbGet('listas',function(listas){
-      if(listas){
-        if(listas.tenentes&&listas.tenentes.length){tenentes=listas.tenentes;renderSelects();}
-        if(listas.responsaveis&&listas.responsaveis.length){responsaveis=listas.responsaveis;renderRespSelect();}
-      }
-      fbGet('escalas/'+mesSel.value,function(data){
-        if(data){_aplicarEscalaCompleta(data);}else{_logAtual=[];renderLog([]);}
-        atualizarSummary();sincronizarPrint();
-        setTimeout(function(){gerarDiasPermanencia();},100);
-        iniciarListener();
-      });
-    });
-    return;
+  if(listas){
+    if(listas.tenentes&&listas.tenentes.length){tenentes=listas.tenentes;renderSelects();}
+    if(listas.responsaveis&&listas.responsaveis.length){responsaveis=listas.responsaveis;renderRespSelect();}
+  }
+  fbGet('escalas/'+mesSel.value,function(data){
+    if(data){_aplicarEscalaCompleta(data);}else{_logAtual=[];renderLog([]);}
+    atualizarSummary();
+    sincronizarPrint();
+    setTimeout(function(){gerarDiasPermanencia();},100);
+    iniciarListener();
+  });
+});
 
 
 
